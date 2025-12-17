@@ -139,25 +139,27 @@
                     </div>
                 </div>
                 
-                <!-- Tampilan Tabel (Desktop) -->
+                <!-- Tampilan Tabel (Desktop) dengan Scrollbar -->
                 <div class="table-container" id="table-container">
-                    <table class="inventory-table">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-hashtag"></i> ID</th>
-                                <th><i class="fas fa-cube"></i> Nama Barang</th>
-                                <th><i class="fas fa-layer-group"></i> Kategori</th>
-                                <th><i class="fas fa-boxes"></i> Stok</th>
-                                <th><i class="fas fa-exclamation"></i> Min.</th>
-                                <th><i class="fas fa-tag"></i> Harga</th>
-                                <th><i class="fas fa-info-circle"></i> Status</th>
-                                <th><i class="fas fa-cogs"></i> Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventory-table-body">
-                            <!-- Data akan diisi oleh JavaScript -->
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-hashtag"></i> ID</th>
+                                    <th><i class="fas fa-cube"></i> Nama Barang</th>
+                                    <th><i class="fas fa-layer-group"></i> Kategori</th>
+                                    <th><i class="fas fa-boxes"></i> Stok</th>
+                                    <th><i class="fas fa-exclamation"></i> Min.</th>
+                                    <th><i class="fas fa-tag"></i> Harga</th>
+                                    <th><i class="fas fa-info-circle"></i> Status</th>
+                                    <th><i class="fas fa-cogs"></i> Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-table-body">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="empty-state" id="empty-state">
                         <i class="fas fa-box-open fa-3x"></i>
                         <h3>Tidak ada data inventori</h3>
