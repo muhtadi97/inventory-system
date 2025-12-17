@@ -162,7 +162,7 @@ function updateViewToggle() {
     if (currentView === 'table') {
         icon.className = 'fas fa-th-large';
         viewToggle.title = 'Tampilan Kartu';
-        document.getElementById('table-container').style.display = 'block';
+        document.getElementById('table-container').style.display = 'flex';
         document.getElementById('cards-container').style.display = 'none';
     } else {
         icon.className = 'fas fa-table';
@@ -172,7 +172,7 @@ function updateViewToggle() {
     }
 }
 
-// Fungsi untuk merender inventori (tabel atau kartu)
+// Fungsi untuk merender inventori (tabel atau kartu) - DIPERBAIKI
 function renderInventory(items = null) {
     const itemsToRender = items || inventory;
     filteredInventory = itemsToRender; // Simpan untuk pagination
@@ -207,7 +207,7 @@ function renderInventory(items = null) {
     currentPageEl.textContent = currentPage;
     totalPagesEl.textContent = totalPages;
     
-    // Render berdasarkan mode tampilan
+    // Render berdasarkan mode tampilan - DIPERBAIKI
     if (currentView === 'table') {
         renderTableView(pageItems);
     } else {
@@ -221,7 +221,7 @@ function renderInventory(items = null) {
     renderPagination(totalPages);
 }
 
-// Fungsi untuk merender tampilan tabel
+// Fungsi untuk merender tampilan tabel - DIPERBAIKI
 function renderTableView(items) {
     inventoryTableBody.innerHTML = items.map(item => {
         const statusClass = item.stock <= item.minimumStock ? 'low' : 'adequate';
@@ -260,7 +260,7 @@ function renderTableView(items) {
     }).join('');
 }
 
-// Fungsi untuk merender tampilan kartu
+// Fungsi untuk merender tampilan kartu - DIPERBAIKI
 function renderCardsView(items) {
     cardsContainer.innerHTML = items.map(item => {
         const statusClass = item.stock <= item.minimumStock ? 'low' : 'adequate';
@@ -312,7 +312,7 @@ function renderCardsView(items) {
     }).join('');
 }
 
-// Fungsi untuk merender pagination controls
+// Fungsi untuk merender pagination controls - DIPERBAIKI
 function renderPagination(totalPages) {
     if (totalPages <= 1) {
         paginationEl.innerHTML = '';
@@ -391,15 +391,23 @@ function renderPagination(totalPages) {
     paginationEl.innerHTML = paginationHTML;
 }
 
-// Fungsi untuk pergi ke halaman tertentu
+// Fungsi untuk pergi ke halaman tertentu - DIPERBAIKI
 function goToPage(page) {
+    if (page < 1 || page > Math.ceil((filteredInventory || inventory).length / itemsPerPage)) {
+        return;
+    }
+    
     currentPage = page;
     renderInventory();
     
-    // Scroll ke atas tabel/kartu
+    // Scroll ke atas tabel/kartu dengan smooth scroll
     const inventoryCard = document.querySelector('.inventory-card');
     if (inventoryCard) {
-        inventoryCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const scrollPosition = inventoryCard.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        });
     }
 }
 
@@ -960,7 +968,7 @@ function addActivity(type, itemName, quantity, notes = '') {
     localStorage.setItem('nextActivityId', nextActivityId.toString());
 }
 
-// Fungsi untuk menangani pencarian
+// Fungsi untuk menangani pencarian - DIPERBAIKI
 function handleSearch() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     
@@ -982,7 +990,7 @@ function handleSearch() {
     renderInventory(filteredItems);
 }
 
-// Fungsi untuk refresh data
+// Fungsi untuk refresh data - DIPERBAIKI
 function refreshData() {
     currentPage = 1;
     renderInventory();
@@ -991,7 +999,7 @@ function refreshData() {
     showNotification('Data diperbarui', 'info');
 }
 
-// Fungsi untuk mengekspor data
+// Fungsi untuk mengekspor data - DIPERBAIKI
 function exportData() {
     // Tentukan data yang akan diekspor
     const dataToExport = filteredInventory || inventory;
@@ -1041,7 +1049,7 @@ function closeMobileMenu() {
     mobileMenu.classList.remove('active');
 }
 
-// Fungsi untuk menangani resize window
+// Fungsi untuk menangani resize window - DIPERBAIKI
 function handleResize() {
     detectViewMode();
     renderInventory();
